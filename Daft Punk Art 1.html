@@ -1,0 +1,34 @@
+<html>
+<body>
+<canvas id="myCanvas" width="1920" height="1080"></canvas>
+<script>
+let image = new Image();
+image.src = ("https://weraveyou.com/wp-content/uploads/2020/10/Daft-Punk.jpg");
+let canvas = document.getElementById("myCanvas");
+let context = canvas.getContext("2d");
+let row, imageWidth, imageHeight;
+let currentImage = 0;
+ 
+image.onload = function() {
+  imageWidth = image.width;
+  imageHeight = image.height;
+  row = imageHeight;
+  requestAnimationFrame(animate);
+};
+ 
+function animate() {
+  context.drawImage(image, 0, row, imageWidth, 1, 0, 0, imageWidth, row);
+  if (row > 0) row--;
+  else {
+    row = imageHeight;
+    if (currentImage == 1)
+      currentImage = 0;
+    else
+      currentImage = 1;
+  }
+  requestAnimationFrame(animate);
+}
+ 
+</script>
+</body>
+</html>
